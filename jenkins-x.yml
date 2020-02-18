@@ -1,0 +1,14 @@
+buildPack: go
+pipelineConfig:
+  env:
+    - name: GIT_COMMITTER_EMAIL
+      value: jenkins-x@googlegroups.com
+    - name: GIT_AUTHOR_EMAIL
+      value: jenkins-x@googlegroups.com
+    - name: GIT_AUTHOR_NAME
+      value: jenkins-x-bot
+    - name: GIT_COMMITTER_NAME
+      value: jenkins-x-bot
+  agent:
+    label: jenkins-go
+    container: gcr.io/camunda-consulting-de/builder-go-kubebuilder:0.0.6
