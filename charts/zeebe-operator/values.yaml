@@ -12,6 +12,7 @@ env:
   PIPELINES_NAMESPACE: "default"
   PIPELINES_SA: "tekton-bot"
   BUILDER_IMAGE: "gcr.io/camunda-consulting-de/helm-builder:0.0.1"
+  VERSION_STREAM: "http://github.com/zeebe-io/zeebe-version-stream-helm"
 # enable this flag to use knative serve to deploy the app
 knativeDeploy: false
 

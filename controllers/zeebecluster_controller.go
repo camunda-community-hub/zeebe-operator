@@ -68,6 +68,7 @@ const (
 var pipelinesNamespace = os.Getenv("PIPELINES_NAMESPACE") // This is related to the Role, RB, and SA to run pipelines
 var pipelinesServiceAccountName = os.Getenv("PIPELINES_SA")
 var builderImage = os.Getenv("BUILDER_IMAGE") //old one gcr.io/jenkinsxio/builder-go:2.0.1028-359
+var versionStream = os.Getenv("VERSION_STREAM")
 
 func (p *PipelineRunner) checkForTask(name string) bool {
 	options := metav1.GetOptions{}
@@ -84,7 +85,7 @@ func (p *PipelineRunner) initPipelineRunner(namespace string) {
 	pipelineResource := builder.PipelineResource("zeebe-base-chart", namespace,
 		builder.PipelineResourceSpec(v1alpha1.PipelineResourceType("git"),
 			builder.PipelineResourceSpecParam("revision", "master"),
-			builder.PipelineResourceSpecParam("url", "https://github.com/salaboy/zeebe-base-chart")))
+			builder.PipelineResourceSpecParam("url", versionStream)))
 
 	log.Info("> Creating PipelineResource: ", "pipelineResource", pipelineResource)
 	p.tekton.TektonV1alpha1().PipelineResources(namespace).Create(pipelineResource)
