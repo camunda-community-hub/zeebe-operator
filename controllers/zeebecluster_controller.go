@@ -82,7 +82,7 @@ func (p *PipelineRunner) checkForTask(name string) bool {
 func (p *PipelineRunner) initPipelineRunner(namespace string) {
 	log := p.Log.WithValues("pipelineresource", namespace)
 	//@TODO:  Do as initialization of the Operator ..
-	pipelineResource := builder.PipelineResource("zeebe-base-chart", namespace,
+	pipelineResource := builder.PipelineResource("zeebe-version-stream", namespace,
 		builder.PipelineResourceSpec(v1alpha1.PipelineResourceType("git"),
 			builder.PipelineResourceSpecParam("revision", "master"),
 			builder.PipelineResourceSpecParam("url", versionStream)))
@@ -96,9 +96,9 @@ func (p *PipelineRunner) createTaskAndTaskRunInstall(namespace string, zeebeClus
 	log := p.Log.WithValues("createTaskAndRun", namespace)
 	task := builder.Task("install-task-"+zeebeCluster.Name, namespace,
 		builder.TaskSpec(
-			builder.TaskInputs(builder.InputsResource("zeebe-base-chart", "git")),
+			builder.TaskInputs(builder.InputsResource("zeebe-version-stream", "git")),
 			builder.Step("clone-base-helm-chart", builderImage,
-				builder.StepCommand("make", "-C", "/workspace/zeebe-base-chart/", "build", "install"),
+				builder.StepCommand("make", "-C", "/workspace/zeebe-version-stream/", "build", "install"),
 				builder.StepEnvVar("CLUSTER_NAME", zeebeCluster.Name),
 				builder.StepEnvVar("NAMESPACE", zeebeCluster.Name))))
 
@@ -119,8 +119,8 @@ func (p *PipelineRunner) createTaskAndTaskRunInstall(namespace string, zeebeClus
 			builder.TaskRunDeprecatedServiceAccount(pipelinesServiceAccountName, pipelinesServiceAccountName), // This require a SA being created for it to run
 
 			builder.TaskRunTaskRef("install-task-"+zeebeCluster.Name),
-			builder.TaskRunInputs(builder.TaskRunInputsResource("zeebe-base-chart",
-				builder.TaskResourceBindingRef("zeebe-base-chart")))))
+			builder.TaskRunInputs(builder.TaskRunInputsResource("zeebe-version-stream",
+				builder.TaskResourceBindingRef("zeebe-version-stream")))))
 
 	if err := ctrl.SetControllerReference(&zeebeCluster, taskRun, r.Scheme); err != nil {
 		log.Error(err, "unable set owner to taskRun")
@@ -140,9 +140,9 @@ func (p *PipelineRunner) createTaskAndTaskRunDelete(release string, namespace st
 	uuid, _ := uuid2.NewUUID()
 	task := builder.Task("delete-task-"+release+"-"+uuid.String(), namespace,
 		builder.TaskSpec(
-			builder.TaskInputs(builder.InputsResource("zeebe-base-chart", "git")),
+			builder.TaskInputs(builder.InputsResource("zeebe-version-stream", "git")),
 			builder.Step("clone-base-helm-chart", builderImage,
-				builder.StepCommand("make", "-C", "/workspace/zeebe-base-chart/", "delete"),
+				builder.StepCommand("make", "-C", "/workspace/zeebe-version-stream/", "delete"),
 				builder.StepEnvVar("CLUSTER_NAME", release))))
 
 	_, errorTask := p.tekton.TektonV1alpha1().Tasks(namespace).Create(task)
@@ -158,8 +158,8 @@ func (p *PipelineRunner) createTaskAndTaskRunDelete(release string, namespace st
 			builder.TaskRunDeprecatedServiceAccount("pipelinerunner", "pipelinerunner"), // This require a SA being created for it to run
 
 			builder.TaskRunTaskRef("delete-task-"+release+"-"+uuid.String()),
-			builder.TaskRunInputs(builder.TaskRunInputsResource("zeebe-base-chart",
-				builder.TaskResourceBindingRef("zeebe-base-chart")))))
+			builder.TaskRunInputs(builder.TaskRunInputsResource("zeebe-version-stream",
+				builder.TaskResourceBindingRef("zeebe-version-stream")))))
 
 	log.Info("> Creating TaskRun: ", "taskrun", taskRun)
 	_, errorTaskRun := p.tekton.TektonV1alpha1().TaskRuns(namespace).Create(taskRun)
@@ -441,68 +441,6 @@ func (r *ZeebeClusterReconciler) SetupWithManager(mgr ctrl.Manager) error {
 
 			}),
 		}).
-		//Watches(&source.Kind{Type: &coreV1.Service{}}, &handler.EnqueueRequestsFromMapFunc{
-		//	ToRequests: handler.ToRequestsFunc(func(obj handler.MapObject) []ctrl.Request {
-		//		service, ok := obj.Object.(*coreV1.Service)
-		//		if !ok {
-		//			r.Log.Info("ERROR: unexpected type")
-		//		}
-		//
-		//		var zeebeClusterList zeebev1.ZeebeClusterList
-		//		//, client.MatchingFields{"metadata.name" :service.GetLabels()["app.kubernetes.io/instance"]}
-		//		if err := r.List(context.Background(), &zeebeClusterList); err != nil {
-		//			r.Log.Info("unable to get zeebe clusters for statefulset", "statefulset", obj.Meta.GetName())
-		//			return nil
-		//		}
-		//		if len(zeebeClusterList.Items) == 1 {
-		//			if zeebeClusterList.Items[0].Name == service.GetLabels()["app.kubernetes.io/instance"] {
-		//				if zeebeClusterList.Items[0].OwnerReferences == nil {
-		//					_, err := ctrl.CreateOrUpdate(context.Background(), r.Client, service, func() error {
-		//						r.Log.Info("Zeebe Cluster found, updating service ownership ", "cluster", zeebeClusterList.Items[0].Name)
-		//						return ctrl.SetControllerReference(&zeebeClusterList.Items[0], service, r.Scheme)
-		//					})
-		//					if err != nil {
-		//						r.Log.Error(err, "Error setting up owner for service")
-		//					}
-		//				}
-		//			}
-		//		}
-		//
-		//		return nil
-		//
-		//	}),
-		//}).
-		//Watches(&source.Kind{Type: &coreV1.ConfigMap{}}, &handler.EnqueueRequestsFromMapFunc{
-		//	ToRequests: handler.ToRequestsFunc(func(obj handler.MapObject) []ctrl.Request {
-		//		service, ok := obj.Object.(*coreV1.ConfigMap)
-		//		if !ok {
-		//			r.Log.Info("ERROR: unexpected type")
-		//		}
-		//
-		//		var zeebeClusterList zeebev1.ZeebeClusterList
-		//		if err := r.List(context.Background(), &zeebeClusterList); err != nil {
-		//			r.Log.Info("unable to get zeebe clusters for configMap", "configMap", obj.Meta.GetName())
-		//			return nil
-		//		}
-		//
-		//		if len(zeebeClusterList.Items) == 1 {
-		//			if zeebeClusterList.Items[0].Name == service.GetLabels()["app.kubernetes.io/instance"] {
-		//				if zeebeClusterList.Items[0].OwnerReferences == nil {
-		//					_, err := ctrl.CreateOrUpdate(context.Background(), r.Client, service, func() error {
-		//						r.Log.Info("Zeebe Cluster found, updating ConfigMap ownership ", "cluster", zeebeClusterList.Items[0].Name)
-		//						return ctrl.SetControllerReference(&zeebeClusterList.Items[0], service, r.Scheme)
-		//					})
-		//					if err != nil {
-		//						r.Log.Error(err, "Error setting up owner for configMap")
-		//					}
-		//				}
-		//			}
-		//		}
-		//
-		//		return nil
-		//
-		//	}),
-		//}).
 		Complete(r)
 }
 
