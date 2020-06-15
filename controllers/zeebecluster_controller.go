@@ -154,8 +154,8 @@ func (p *PipelineRunner) createTaskAndTaskRunDelete(release string, namespace st
 
 	taskRun := builder.TaskRun("delete-task-run-"+release, namespace,
 		builder.TaskRunSpec(
-			builder.TaskRunServiceAccountName("tekton-pipelines"),
-			builder.TaskRunDeprecatedServiceAccount("tekton-pipelines", "tekton-pipelines"), // This require a SA being created for it to run
+			builder.TaskRunServiceAccountName(pipelinesServiceAccountName),
+			builder.TaskRunDeprecatedServiceAccount(pipelinesServiceAccountName, pipelinesServiceAccountName), // This require a SA being created for it to run
 
 			builder.TaskRunTaskRef("delete-task-"+release+"-"+uuid.String()),
 			builder.TaskRunInputs(builder.TaskRunInputsResource("zeebe-version-stream",
