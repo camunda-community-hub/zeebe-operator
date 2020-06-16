@@ -15,6 +15,7 @@ spec:
     shortNames:
       - rel
     singular: release
+  preserveUnknownFields: true
   scope: Namespaced
   versions:
     - additionalPrinterColumns:
