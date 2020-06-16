@@ -1,0 +1,41 @@
+
+Showing logs for build [32mmeta-zeebe-io-zeebe-operator-ma-xfqj4-7[0m stage [32mmeta-pipeline[0m and container [32mstep-credential-initializer-szxs7[0m
+{"level":"info","ts":1592296609.106416,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1592296609.1071548,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mmeta-zeebe-io-zeebe-operator-ma-xfqj4-7[0m stage [32mmeta-pipeline[0m and container [32mstep-working-dir-initializer-cp9c7[0m
+{"level":"info","ts":1592296610.0568924,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1592296610.0583055,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mmeta-zeebe-io-zeebe-operator-ma-xfqj4-7[0m stage [32mmeta-pipeline[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mmeta-zeebe-io-zeebe-operator-ma-xfqj4-7[0m stage [32mmeta-pipeline[0m and container [32mstep-git-source-meta-zeebe-io-zeebe-operator-ma-xfqj4-49qkv[0m
+{"level":"info","ts":1592296615.1316156,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1592296615.9555283,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/zeebe-io/zeebe-operator.git @ cb48776e59902850e6323d48185096649af363f0 in path /workspace/source"}
+
+Showing logs for build [32mmeta-zeebe-io-zeebe-operator-ma-xfqj4-7[0m stage [32mmeta-pipeline[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:cb48776e59902850e6323d48185096649af363f0
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mmeta-zeebe-io-zeebe-operator-ma-xfqj4-7[0m stage [32mmeta-pipeline[0m and container [32mstep-merge-pull-refs[0m
+SKIP merge-pull-refs: Nothing to merge
+
+Showing logs for build [32mmeta-zeebe-io-zeebe-operator-ma-xfqj4-7[0m stage [32mmeta-pipeline[0m and container [32mstep-create-effective-pipeline[0m
+Effective pipeline written to jenkins-x-release-effective.yml
+
+Showing logs for build [32mmeta-zeebe-io-zeebe-operator-ma-xfqj4-7[0m stage [32mmeta-pipeline[0m and container [32mstep-create-tekton-crds[0m
+running command: echo \$(**-release-version) > VERSION
+
+running command: ** step tag --version \$(cat VERSION)
+Updating chart version in charts/zeebe-operator/Chart.yaml to 0.0.81
+Updating repository in charts/zeebe-operator/values.yaml to gcr.io/camunda-researchanddevelopment/zeebe-operator
+Updating tag in charts/zeebe-operator/values.yaml to 0.0.81
+error: Have you set up a git credential helper? See https://help.github.com/articles/caching-your-github-password-in-git/
+: git output: To https://github.com/zeebe-io/zeebe-operator.git
+ ! [remote rejected] v0.0.81 -> v0.0.81 (cannot lock ref 'refs/tags/v0.0.81': reference already exists)
+error: failed to push some refs to 'https://github.com/zeebe-io/zeebe-operator.git': failed to run 'git push origin v0.0.81' command in directory '', output: 'To https://github.com/zeebe-io/zeebe-operator.git
+ ! [remote rejected] v0.0.81 -> v0.0.81 (cannot lock ref 'refs/tags/v0.0.81': reference already exists)
+error: failed to push some refs to 'https://github.com/zeebe-io/zeebe-operator.git''
+error: failed to set the version on release pipelines: failed to run '/bin/sh -c ** step tag --version $(cat VERSION)' command in directory '/workspace/source', output: ''
+[31m
+Pipeline failed on stage 'meta-pipeline' : container 'step-create-tekton-crds'. The execution of the pipeline has stopped.[0m
