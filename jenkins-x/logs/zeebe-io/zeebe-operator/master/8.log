@@ -1,0 +1,184 @@
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-credential-initializer-bs495[0m
+{"level":"info","ts":1592296857.7950182,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1592296857.795631,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-working-dir-initializer-fnqbp[0m
+{"level":"info","ts":1592296858.1063778,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1592296858.110689,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-zeebe-io-zeebe-operator-master-kk7gq-q4q58[0m
+{"level":"info","ts":1592296975.0524182,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/refs/heads/0.8.0-ns-support: no such file or directory"}
+{"level":"info","ts":1592296976.475212,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/zeebe-io/zeebe-operator.git @ v0.0.82 in path /workspace/source"}
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-jx-git-credentials[0m
+Generated Git credentials file /builder/home/git/credentials
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-build-make-build[0m
+which: no controller-gen in (/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/google-cloud-sdk/bin:/opt/google/chrome:/usr/local/go/bin:/usr/local/glide:/usr/local/dep:/usr/local/:/home/jenkins/go/bin:/usr/local/kubebuilder/bin)
+go get sigs.k8s.io/controller-tools/cmd/controller-gen@v0.2.1
+go: finding sigs.k8s.io v0.2.1
+go: finding sigs.k8s.io/controller-tools/cmd/controller-gen v0.2.1
+go: finding sigs.k8s.io/controller-tools/cmd v0.2.1
+go: finding sigs.k8s.io/controller-tools v0.2.1
+go: downloading sigs.k8s.io/controller-tools v0.2.1
+go: extracting sigs.k8s.io/controller-tools v0.2.1
+go: downloading github.com/spf13/cobra v0.0.5
+go: downloading k8s.io/apimachinery v0.0.0-20190404173353-6a84e37a896d
+go: downloading github.com/fatih/color v1.7.0
+go: downloading sigs.k8s.io/yaml v1.1.0
+go: downloading golang.org/x/tools v0.0.0-20191017205301-920acffc3e65
+go: downloading k8s.io/apiextensions-apiserver v0.0.0-20190409022649-727a075fdec8
+go: downloading github.com/gobuffalo/flect v0.1.5
+go: downloading gopkg.in/yaml.v3 v3.0.0-20190709130402-674ba3eaed22
+go: downloading k8s.io/api v0.0.0-20190409021203-6e4e0e4f393b
+go: extracting github.com/fatih/color v1.7.0
+go: extracting sigs.k8s.io/yaml v1.1.0
+go: extracting github.com/gobuffalo/flect v0.1.5
+go: downloading github.com/mattn/go-isatty v0.0.8
+go: extracting github.com/mattn/go-isatty v0.0.8
+go: downloading golang.org/x/sys v0.0.0-20191010194322-b09406accb47
+go: extracting github.com/spf13/cobra v0.0.5
+go: downloading gopkg.in/yaml.v2 v2.2.4
+go: extracting gopkg.in/yaml.v3 v3.0.0-20190709130402-674ba3eaed22
+go: downloading github.com/inconshreveable/mousetrap v1.0.0
+go: downloading github.com/spf13/pflag v1.0.5
+go: extracting k8s.io/apiextensions-apiserver v0.0.0-20190409022649-727a075fdec8
+go: extracting gopkg.in/yaml.v2 v2.2.4
+go: extracting github.com/inconshreveable/mousetrap v1.0.0
+go: downloading github.com/mattn/go-colorable v0.1.2
+go: extracting github.com/spf13/pflag v1.0.5
+go: extracting k8s.io/apimachinery v0.0.0-20190404173353-6a84e37a896d
+go: extracting github.com/mattn/go-colorable v0.1.2
+go: downloading github.com/gogo/protobuf v1.2.2-0.20190723190241-65acae22fc9d
+go: extracting k8s.io/api v0.0.0-20190409021203-6e4e0e4f393b
+go: downloading k8s.io/klog v1.0.0
+go: downloading gopkg.in/inf.v0 v0.9.1
+go: downloading github.com/google/gofuzz v1.0.0
+go: downloading golang.org/x/net v0.0.0-20191004110552-13f9640d40b9
+go: extracting k8s.io/klog v1.0.0
+go: extracting gopkg.in/inf.v0 v0.9.1
+go: extracting github.com/google/gofuzz v1.0.0
+go: extracting golang.org/x/sys v0.0.0-20191010194322-b09406accb47
+go: extracting golang.org/x/tools v0.0.0-20191017205301-920acffc3e65
+go: extracting golang.org/x/net v0.0.0-20191004110552-13f9640d40b9
+go: downloading golang.org/x/text v0.3.2
+go: extracting github.com/gogo/protobuf v1.2.2-0.20190723190241-65acae22fc9d
+go: extracting golang.org/x/text v0.3.2
+go: finding github.com/spf13/cobra v0.0.5
+go: finding github.com/spf13/pflag v1.0.5
+go: finding github.com/gobuffalo/flect v0.1.5
+go: finding golang.org/x/tools v0.0.0-20191017205301-920acffc3e65
+go: finding k8s.io/apiextensions-apiserver v0.0.0-20190409022649-727a075fdec8
+go: finding k8s.io/apimachinery v0.0.0-20190404173353-6a84e37a896d
+go: finding github.com/fatih/color v1.7.0
+go: finding k8s.io/api v0.0.0-20190409021203-6e4e0e4f393b
+go: finding gopkg.in/yaml.v3 v3.0.0-20190709130402-674ba3eaed22
+go: finding github.com/gogo/protobuf v1.2.2-0.20190723190241-65acae22fc9d
+go: finding github.com/mattn/go-colorable v0.1.2
+go: finding github.com/google/gofuzz v1.0.0
+go: finding github.com/mattn/go-isatty v0.0.8
+go: finding gopkg.in/inf.v0 v0.9.1
+go: finding golang.org/x/sys v0.0.0-20191010194322-b09406accb47
+go: finding k8s.io/klog v1.0.0
+go: finding sigs.k8s.io/yaml v1.1.0
+go: finding gopkg.in/yaml.v2 v2.2.4
+go: finding golang.org/x/net v0.0.0-20191004110552-13f9640d40b9
+go: finding golang.org/x/text v0.3.2
+/home/jenkins/go/bin/controller-gen object:headerFile=./hack/boilerplate.go.txt paths="./..."
+go fmt ./...
+go vet ./...
+go: downloading github.com/onsi/ginkgo v1.10.1
+go: downloading sigs.k8s.io/testing_frameworks v0.1.1
+go: downloading github.com/onsi/gomega v1.7.0
+go: extracting sigs.k8s.io/testing_frameworks v0.1.1
+go: extracting github.com/onsi/ginkgo v1.10.1
+go: extracting github.com/onsi/gomega v1.7.0
+go: downloading github.com/hpcloud/tail v1.0.0
+go: extracting github.com/hpcloud/tail v1.0.0
+go: downloading gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7
+go: extracting gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7
+CGO_ENABLED=0 go build -o bin/manager main.go
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-build-container-build[0m
+E0616 08:46:40.365851       8 aws_credentials.go:77] while getting AWS credentials NoCredentialProviders: no valid providers in chain. Deprecated.
+	For verbose messaging see aws.Config.CredentialsChainVerboseErrors
+[36mINFO[0m[0001] Retrieving image manifest alpine:3.10        
+E0616 08:46:40.855626       8 metadata.go:154] while reading 'google-dockercfg' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg
+E0616 08:46:40.859118       8 metadata.go:166] while reading 'google-dockercfg-url' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg-url
+[36mINFO[0m[0002] Retrieving image manifest alpine:3.10        
+[36mINFO[0m[0003] Built cross stage deps: map[]                
+[36mINFO[0m[0003] Retrieving image manifest alpine:3.10        
+[36mINFO[0m[0004] Retrieving image manifest alpine:3.10        
+[36mINFO[0m[0005] Executing 0 build triggers                   
+[36mINFO[0m[0005] Checking for cached layer gcr.io/camunda-researchanddevelopment/cache:91fe4fcde79980af1bbe47826bf4cdae294728713c7a97a834309c2760a57ca5... 
+[36mINFO[0m[0006] Using caching version of cmd: RUN apk add --update --no-cache ca-certificates git libc6-compat 
+[36mINFO[0m[0006] Checking for cached layer gcr.io/camunda-researchanddevelopment/cache:93095390e7c2b4d4ed94b3ebf594e493d0275fbe801b9e6440b389bfe5b14abb... 
+[36mINFO[0m[0006] Using caching version of cmd: COPY ./bin/manager /manager 
+[36mINFO[0m[0006] Skipping unpacking as no commands require it. 
+[36mINFO[0m[0006] RUN apk add --update --no-cache ca-certificates git libc6-compat 
+[36mINFO[0m[0006] Found cached layer, extracting to filesystem 
+[36mINFO[0m[0007] WORKDIR /                                    
+[36mINFO[0m[0007] cmd: workdir                                 
+[36mINFO[0m[0007] Changed working directory to /               
+[36mINFO[0m[0007] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0007] COPY ./bin/manager /manager                  
+[36mINFO[0m[0007] Found cached layer, extracting to filesystem 
+[36mINFO[0m[0008] ENTRYPOINT ["/manager"]                      
+[36mINFO[0m[0008] No files changed in this command, skipping snapshotting. 
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-build-post-build[0m
+no CVE provider running in the current ** namespace so skip adding image to be analysed
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-changelog[0m
+Converted /workspace/source/charts/zeebe-operator to an unshallow repository
+Generating change log from git ref c3a6e2ef2f1da2667d20590cc4fa9be1fc4d22ae => f4c7318a8e8ccd5d96970cd9c130be6166f662ee
+WARNING: No release found for zeebe-io/zeebe-operator and tag v0.0.82 so creating a new release
+Updated the release information at https://github.com/zeebe-io/zeebe-operator/releases/tag/v0.0.82
+generated: /workspace/source/charts/zeebe-operator/templates/release.yaml
+Created Release zeebe-operator-0-0-82 resource in namespace **
+Updating PipelineActivity zeebe-io-zeebe-operator-master-8 with version 0.0.82
+Updated PipelineActivities zeebe-io-zeebe-operator-master-8 with release notes URL: https://github.com/zeebe-io/zeebe-operator/releases/tag/v0.0.82
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-helm-release[0m
+WARNING: failed to get the requirements from team settings: validation failures in requirements from team settings:
+cluster: Additional property devEnvApprovers is not allowed
+velero: Additional property schedule is not allowed
+velero: Additional property ttl is not allowed
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: storage.googleapis.com https://storage.googleapis.com/chartmuseum.jenkins-x.io
+Successfully added Helm repository storage.googleapis.com.
+Adding missing Helm repo: jenkins-x-chartmuseum http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository jenkins-x-chartmuseum.
+WARNING: failed to get the requirements from team settings: validation failures in requirements from team settings:
+cluster: Additional property devEnvApprovers is not allowed
+velero: Additional property schedule is not allowed
+velero: Additional property ttl is not allowed
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+WARNING: failed to get the requirements from team settings: validation failures in requirements from team settings:
+cluster: Additional property devEnvApprovers is not allowed
+velero: Additional property schedule is not allowed
+velero: Additional property ttl is not allowed
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Uploading chart file zeebe-operator-0.0.82.tgz to http://jenkins-x-chartmuseum:8080/api/charts
+Received 201 response: {"saved":true}
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-kk7gq-8[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-jx-promote[0m
+WARNING: prow based install so skip waiting for the merge of Pull Requests to go green as currently there is an issue with gettingstatuses from the PR, see https://github.com/jenkins-x/**/issues/2410
+WARNING: failed to get the requirements from team settings: validation failures in requirements from team settings:
+cluster: Additional property devEnvApprovers is not allowed
+velero: Additional property schedule is not allowed
+velero: Additional property ttl is not allowed
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Promoting app zeebe-operator version 0.0.82 to namespace **-staging
+Created Pull Request: https://github.com/*******/environment-zeebe-helm-new-staging/pull/34
+Added label updatebot to Pull Request https://github.com/*******/environment-zeebe-helm-new-staging/pull/34
+got git provider status pending from PR https://github.com/*******/environment-zeebe-helm-new-staging/pull/34
+Pull Request https://github.com/*******/environment-zeebe-helm-new-staging/pull/34 is merged at sha 02f49ec0e14703130a2034218a6290656f1b10f7
+Pull Request merged but we are not waiting for the update pipeline to complete!
