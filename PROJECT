@@ -5,3 +5,6 @@ resources:
 - group: api
   version: v1
   kind: ZeebeCluster
+- group: api
+  version: v1
+  kind: Operate

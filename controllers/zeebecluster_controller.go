@@ -23,6 +23,8 @@ import (
 	"github.com/tektoncd/pipeline/pkg/apis/pipeline/v1alpha1"
 	tekton "github.com/tektoncd/pipeline/pkg/client/clientset/versioned"
 	"github.com/tektoncd/pipeline/test/builder"
+	"github.com/zeebe-io/zeebe/clients/go/pkg/pb"
+	"github.com/zeebe-io/zeebe/clients/go/pkg/zbc"
 	appsV1 "k8s.io/api/apps/v1"
 	coreV1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -32,7 +34,6 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
-
 	"knative.dev/pkg/apis"
 	"os"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -79,16 +80,27 @@ func (p *PipelineRunner) checkForTask(name string) bool {
 	return false
 }
 
+//@TODO:  Do as initialization of the Operator ..
 func (p *PipelineRunner) initPipelineRunner(namespace string) {
 	log := p.Log.WithValues("pipelineresource", namespace)
-	//@TODO:  Do as initialization of the Operator ..
-	pipelineResource := builder.PipelineResource("zeebe-version-stream", namespace,
+
+	pipelineResourceZeebeCluster := builder.PipelineResource("zeebe-version-stream", namespace,
 		builder.PipelineResourceSpec(v1alpha1.PipelineResourceType("git"),
 			builder.PipelineResourceSpecParam("revision", "master"),
 			builder.PipelineResourceSpecParam("url", versionStream)))
 
-	log.Info("> Creating PipelineResource: ", "pipelineResource", pipelineResource)
-	p.tekton.TektonV1alpha1().PipelineResources(namespace).Create(pipelineResource)
+	log.Info("> Creating PipelineResource for ZeebeCluster: ", "pipelineResourceZeebeCluster", pipelineResourceZeebeCluster)
+	p.tekton.TektonV1alpha1().PipelineResources(namespace).Create(pipelineResourceZeebeCluster)
+
+	pipelineResourceOperate := builder.PipelineResource("operate-version-stream", namespace,
+		builder.PipelineResourceSpec(v1alpha1.PipelineResourceType("git"),
+			builder.PipelineResourceSpecParam("revision", "master"),
+			builder.PipelineResourceSpecParam("url", "http://github.com/zeebe-io/operate-version-stream-helm")))
+
+	log.Info("> Creating PipelineResource for Operate: ", "pipelineResourceOperate", pipelineResourceOperate)
+	p.tekton.TektonV1alpha1().PipelineResources(namespace).Create(pipelineResourceOperate)
+
+
 	//@TODO: END
 }
 
@@ -337,6 +349,27 @@ func (r *ZeebeClusterReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 				})
 				zeebeCluster.Status.StatusName = "Ready"
 
+				zbClient, err := zbc.NewClient(&zbc.ClientConfig{
+					GatewayAddress:         clusterName+"-zeebe-gateway."+clusterName+".svc.cluster.local:26500",
+					UsePlaintextConnection: true,
+				})
+
+				if err != nil {
+					panic(err)
+				}
+
+				topology, err := zbClient.NewTopologyCommand().Send(ctx)
+				if err != nil {
+					panic(err)
+				}
+
+				for _, broker := range topology.Brokers {
+					fmt.Println("Broker", broker.Host, ":", broker.Port)
+					for _, partition := range broker.Partitions {
+						fmt.Println("  Partition", partition.PartitionId, ":", roleToString(partition.Role))
+					}
+				}
+
 			} else {
 				setCondition(&zeebeCluster.Status.Conditions, zeebev1.StatusCondition{
 					Type:    "Pending",
@@ -364,6 +397,17 @@ func (r *ZeebeClusterReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 	}
 
 	return ctrl.Result{}, nil
+}
+
+func roleToString(role pb.Partition_PartitionBrokerRole) string {
+	switch role {
+		case pb.Partition_LEADER:
+			return "Leader"
+		case pb.Partition_FOLLOWER:
+			return "Follower"
+		default:
+			return "Unknown"
+	}
 }
 
 func (r *ZeebeClusterReconciler) SetupWithManager(mgr ctrl.Manager) error {

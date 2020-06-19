@@ -1,0 +1,6 @@
+apiVersion: zeebe.io/v1
+kind: Operate
+metadata:
+  name: operate-sample
+spec:
+  zeebeClusterName: my-zeebe-cluster 

@@ -72,6 +72,26 @@ rules:
 - apiGroups:
   - zeebe.io
   resources:
+  - operates
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - zeebe.io
+  resources:
+  - operates/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - zeebe.io
+  resources:
   - zeebeclusters
   verbs:
   - create

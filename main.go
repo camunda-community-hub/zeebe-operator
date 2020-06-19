@@ -23,6 +23,7 @@ import (
 
 	"zeebe-operator/controllers"
 
+
 	apps "k8s.io/api/apps/v1"
 	core "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -72,6 +73,13 @@ func main() {
 		Log:    ctrl.Log.WithName("controllers").WithName("ZeebeCluster"),
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "ZeebeCluster")
+		os.Exit(1)
+	}
+	if err = (&controllers.OperateReconciler{
+		Client: mgr.GetClient(),
+		Log:    ctrl.Log.WithName("controllers").WithName("Operate"),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "Operate")
 		os.Exit(1)
 	}
 	// +kubebuilder:scaffold:builder
