@@ -26,8 +26,10 @@ import (
 type ZeebeClusterSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	StatefulSetName string `json:"statefulSetName,omitempty"`
-	ServiceName     string `json:"serviceName,omitempty"`
+	StatefulSetName   string `json:"statefulSetName,omitempty"`
+	ServiceName       string `json:"serviceName,omitempty"`
+	OperateEnabled    bool   `json:"operateEnabled,omitempty"`
+	ZeebeHealthChecks bool   `json:"zeebeHealthChecksEnabled,omitempty"`
 }
 
 // ZeebeClusterStatus defines the observed state of ZeebeCluster

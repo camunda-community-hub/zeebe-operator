@@ -8,3 +8,6 @@ resources:
 - group: api
   version: v1
   kind: Operate
+- group: api
+  version: v1
+  kind: Workflow

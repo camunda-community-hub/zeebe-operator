@@ -39,11 +39,15 @@ spec:
         spec:
           description: ZeebeClusterSpec defines the desired state of ZeebeCluster
           properties:
+            operateEnabled:
+              type: boolean
             serviceName:
               type: string
             statefulSetName:
               description: 'INSERT ADDITIONAL SPEC FIELDS - desired state of cluster Important: Run "make" to regenerate code after modifying this file'
               type: string
+            zeebeHealthChecksEnabled:
+              type: boolean
           type: object
         status:
           description: ZeebeClusterStatus defines the observed state of ZeebeCluster

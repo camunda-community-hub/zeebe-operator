@@ -7,6 +7,26 @@ metadata:
   name: zeebe-operator-role
 rules:
   - apiGroups:
+      - api.zeebe.io
+    resources:
+      - workflows
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - api.zeebe.io
+    resources:
+      - workflows/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
       - apps
     resources:
       - deployments
@@ -69,26 +89,6 @@ rules:
       - patch
       - update
       - watch
-  - apiGroups:
-      - zeebe.io
-    resources:
-      - operates
-    verbs:
-      - create
-      - delete
-      - get
-      - list
-      - patch
-      - update
-      - watch
-  - apiGroups:
-      - zeebe.io
-    resources:
-      - operates/status
-    verbs:
-      - get
-      - patch
-      - update
   - apiGroups:
       - zeebe.io
     resources:

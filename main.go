@@ -23,6 +23,7 @@ import (
 
 	"zeebe-operator/controllers"
 
+	apiv1 "zeebe-operator/api/v1"
 
 	apps "k8s.io/api/apps/v1"
 	core "k8s.io/api/core/v1"
@@ -44,6 +45,7 @@ func init() {
 	apps.AddToScheme(scheme)
 	core.AddToScheme(scheme)
 	_ = zeebev1.AddToScheme(scheme)
+	_ = apiv1.AddToScheme(scheme)
 	// +kubebuilder:scaffold:scheme
 }
 
@@ -75,11 +77,11 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "ZeebeCluster")
 		os.Exit(1)
 	}
-	if err = (&controllers.OperateReconciler{
+	if err = (&controllers.WorkflowReconciler{
 		Client: mgr.GetClient(),
-		Log:    ctrl.Log.WithName("controllers").WithName("Operate"),
+		Log:    ctrl.Log.WithName("controllers").WithName("Workflow"),
 	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "Operate")
+		setupLog.Error(err, "unable to create controller", "controller", "Workflow")
 		os.Exit(1)
 	}
 	// +kubebuilder:scaffold:builder

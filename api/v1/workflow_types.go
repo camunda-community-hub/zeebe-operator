@@ -22,42 +22,41 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// OperateSpec defines the desired state of Operate
-type OperateSpec struct {
+// WorkflowSpec defines the desired state of Workflow
+type WorkflowSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	ZeebeClusterName string `json:"zeebeClusterName,omitempty"`
-	ServiceName     string `json:"serviceName,omitempty"`
+	ClusterName               string `json:"clusterName,omitempty"`
+	WorkflowDefinitionName    string `json:"workflowDefinitionName,omitempty"`
+	WorkflowDefinitionContent string `json:"workflowDefinitionContent,omitempty"`
 }
 
-// OperateStatus defines the observed state of Operate
-type OperateStatus struct {
+// WorkflowStatus defines the observed state of Workflow
+type WorkflowStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	ClusterName string            `json:"clusterName"`
-	StatusName  string            `json:"statusName"`
 }
 
 // +kubebuilder:object:root=true
 
-// Operate is the Schema for the operates API
-type Operate struct {
+// Workflow is the Schema for the workflows API
+type Workflow struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   OperateSpec   `json:"spec,omitempty"`
-	Status OperateStatus `json:"status,omitempty"`
+	Spec   WorkflowSpec   `json:"spec,omitempty"`
+	Status WorkflowStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// OperateList contains a list of Operate
-type OperateList struct {
+// WorkflowList contains a list of Workflow
+type WorkflowList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Operate `json:"items"`
+	Items           []Workflow `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&Operate{}, &OperateList{})
+	SchemeBuilder.Register(&Workflow{}, &WorkflowList{})
 }

@@ -40,6 +40,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 	"sigs.k8s.io/controller-runtime/pkg/source"
+	"strconv"
 	"time"
 	zeebev1 "zeebe-operator/api/v1"
 )
@@ -92,15 +93,6 @@ func (p *PipelineRunner) initPipelineRunner(namespace string) {
 	log.Info("> Creating PipelineResource for ZeebeCluster: ", "pipelineResourceZeebeCluster", pipelineResourceZeebeCluster)
 	p.tekton.TektonV1alpha1().PipelineResources(namespace).Create(pipelineResourceZeebeCluster)
 
-	pipelineResourceOperate := builder.PipelineResource("operate-version-stream", namespace,
-		builder.PipelineResourceSpec(v1alpha1.PipelineResourceType("git"),
-			builder.PipelineResourceSpecParam("revision", "master"),
-			builder.PipelineResourceSpecParam("url", "http://github.com/zeebe-io/operate-version-stream-helm")))
-
-	log.Info("> Creating PipelineResource for Operate: ", "pipelineResourceOperate", pipelineResourceOperate)
-	p.tekton.TektonV1alpha1().PipelineResources(namespace).Create(pipelineResourceOperate)
-
-
 	//@TODO: END
 }
 
@@ -112,6 +104,7 @@ func (p *PipelineRunner) createTaskAndTaskRunInstall(namespace string, zeebeClus
 			builder.Step("clone-base-helm-chart", builderImage,
 				builder.StepCommand("make", "-C", "/workspace/zeebe-version-stream/", "build", "install"),
 				builder.StepEnvVar("CLUSTER_NAME", zeebeCluster.Name),
+				builder.StepEnvVar("OPERATE_ENABLED", strconv.FormatBool(zeebeCluster.Spec.OperateEnabled)),
 				builder.StepEnvVar("NAMESPACE", zeebeCluster.Name))))
 
 	if err := ctrl.SetControllerReference(&zeebeCluster, task, r.Scheme); err != nil {
@@ -349,24 +342,26 @@ func (r *ZeebeClusterReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 				})
 				zeebeCluster.Status.StatusName = "Ready"
 
-				zbClient, err := zbc.NewClient(&zbc.ClientConfig{
-					GatewayAddress:         clusterName+"-zeebe-gateway."+clusterName+".svc.cluster.local:26500",
-					UsePlaintextConnection: true,
-				})
+				if zeebeCluster.Spec.ZeebeHealthChecks {
+					zbClient, err := zbc.NewClient(&zbc.ClientConfig{
+						GatewayAddress:         clusterName + "-zeebe-gateway." + clusterName + ".svc.cluster.local:26500",
+						UsePlaintextConnection: true,
+					})
 
-				if err != nil {
-					panic(err)
-				}
+					if err != nil {
+						panic(err)
+					}
 
-				topology, err := zbClient.NewTopologyCommand().Send(ctx)
-				if err != nil {
-					panic(err)
-				}
+					topology, err := zbClient.NewTopologyCommand().Send(ctx)
+					if err != nil {
+						panic(err)
+					}
 
-				for _, broker := range topology.Brokers {
-					fmt.Println("Broker", broker.Host, ":", broker.Port)
-					for _, partition := range broker.Partitions {
-						fmt.Println("  Partition", partition.PartitionId, ":", roleToString(partition.Role))
+					for _, broker := range topology.Brokers {
+						fmt.Println("Broker", broker.Host, ":", broker.Port)
+						for _, partition := range broker.Partitions {
+							fmt.Println("  Partition", partition.PartitionId, ":", roleToString(partition.Role))
+						}
 					}
 				}
 
@@ -401,12 +396,12 @@ func (r *ZeebeClusterReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 
 func roleToString(role pb.Partition_PartitionBrokerRole) string {
 	switch role {
-		case pb.Partition_LEADER:
-			return "Leader"
-		case pb.Partition_FOLLOWER:
-			return "Follower"
-		default:
-			return "Unknown"
+	case pb.Partition_LEADER:
+		return "Leader"
+	case pb.Partition_FOLLOWER:
+		return "Follower"
+	default:
+		return "Unknown"
 	}
 }
 
