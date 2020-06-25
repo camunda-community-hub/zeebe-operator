@@ -38,6 +38,7 @@ type ZeebeClusterStatus struct {
 	// Important: Run "make" to regenerate code after modifying this file
 	ClusterName string            `json:"clusterName"`
 	StatusName  string            `json:"statusName"`
+	Health      string            `json:"health"`
 	Conditions  []StatusCondition `json:"conditions,omitempty"`
 }
 
@@ -46,6 +47,7 @@ type ZeebeClusterStatus struct {
 // +kubebuilder:resource:scope=Namespaced,path=zeebeclusters,shortName=zb
 // +kubebuilder:printcolumn:JSONPath=".status.statusName",name=Status,type=string
 // +kubebuilder:printcolumn:JSONPath=".spec.serviceName",name=Service,type=string
+// +kubebuilder:printcolumn:JSONPath=".status.health",name=Health,type=string
 // ZeebeCluster is the Schema for the zeebeclusters API
 type ZeebeCluster struct {
 	metav1.TypeMeta   `json:",inline"`

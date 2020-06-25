@@ -357,12 +357,20 @@ func (r *ZeebeClusterReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 						panic(err)
 					}
 
+					var message string
+
 					for _, broker := range topology.Brokers {
-						fmt.Println("Broker", broker.Host, ":", broker.Port)
+
+						message += fmt.Sprintf("%s%s%s%d \n", "Broker", broker.Host, ":", broker.Port)
+
 						for _, partition := range broker.Partitions {
-							fmt.Println("  Partition", partition.PartitionId, ":", roleToString(partition.Role))
+							message += fmt.Sprintf("\t %s%d%s%s \n", "  Partition", partition.PartitionId, ":", roleToString(partition.Role))
+
 						}
 					}
+					zeebeCluster.Status.Health = message
+				} else {
+					zeebeCluster.Status.Health = "OFF"
 				}
 
 			} else {

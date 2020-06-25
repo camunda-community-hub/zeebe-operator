@@ -6,13 +6,20 @@ metadata:
   creationTimestamp: null
   name: workflows.zeebe.io
 spec:
+  additionalPrinterColumns:
+  - JSONPath: .spec.clusterName
+    name: Cluster Name
+    type: string
   group: zeebe.io
   names:
     kind: Workflow
     listKind: WorkflowList
     plural: workflows
+    shortNames:
+    - wf
     singular: workflow
-  scope: ""
+  scope: Namespaced
+  subresources: {}
   validation:
     openAPIV3Schema:
       description: Workflow is the Schema for the workflows API

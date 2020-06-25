@@ -13,6 +13,9 @@ spec:
   - JSONPath: .spec.serviceName
     name: Service
     type: string
+  - JSONPath: .status.health
+    name: Health
+    type: string
   group: zeebe.io
   names:
     kind: ZeebeCluster
@@ -77,10 +80,13 @@ spec:
                 - type
                 type: object
               type: array
+            health:
+              type: string
             statusName:
               type: string
           required:
           - clusterName
+          - health
           - statusName
           type: object
       type: object

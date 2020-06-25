@@ -38,7 +38,8 @@ type WorkflowStatus struct {
 }
 
 // +kubebuilder:object:root=true
-
+// +kubebuilder:resource:scope=Namespaced,path=workflows,shortName=wf
+// +kubebuilder:printcolumn:JSONPath=".spec.clusterName",name=Cluster Name,type=string
 // Workflow is the Schema for the workflows API
 type Workflow struct {
 	metav1.TypeMeta   `json:",inline"`
