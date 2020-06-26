@@ -26,28 +26,39 @@ import (
 type ZeebeClusterSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	StatefulSetName   string `json:"statefulSetName,omitempty"`
-	ServiceName       string `json:"serviceName,omitempty"`
-	OperateEnabled    bool   `json:"operateEnabled,omitempty"`
-	ZeebeHealthChecks bool   `json:"zeebeHealthChecksEnabled,omitempty"`
+	StatefulSetName      string `json:"statefulSetName,omitempty"`
+	ClusterType          string `json:"clusterType,omitempty"`
+	ServiceName          string `json:"serviceName,omitempty"`
+	ElasticSearchEnabled bool `json:"elasticSearchEnabled,omitempty"`
+	ElasticSearchHost     string `json:"elasticSearchHost,omitempty"`
+	ElasticSearchPort    int32 `json:"elasticSearchPort,omitempty"`
+	KibanaEnabled        bool `json:"kibanaEnabled,omitempty"`
+	PrometheusEnabled    bool `json:"prometheusEnabled,omitempty"`
+	OperateEnabled       bool   `json:"operateEnabled,omitempty"`
+	ZeebeHealthChecks    bool   `json:"zeebeHealthChecksEnabled,omitempty"`
 }
 
 // ZeebeClusterStatus defines the observed state of ZeebeCluster
 type ZeebeClusterStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	ClusterName string            `json:"clusterName"`
-	StatusName  string            `json:"statusName"`
-	Health      string            `json:"health"`
-	Conditions  []StatusCondition `json:"conditions,omitempty"`
+	ClusterName        string `json:"clusterName"`
+	StatusName         string `json:"statusName"`
+	ZeebeHealth        string `json:"zeebeHealth"`
+	ZeebeHealthReport  string `json:"zeebeHealthReport"`
+	Conditions         []StatusCondition `json:"conditions,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Namespaced,path=zeebeclusters,shortName=zb
 // +kubebuilder:printcolumn:JSONPath=".status.statusName",name=Status,type=string
+// +kubebuilder:printcolumn:JSONPath=".spec.operateEnabled",name=Operate,type=string
+// +kubebuilder:printcolumn:JSONPath=".spec.elasticSearchEnabled",name=ElasticSearch,type=string
+// +kubebuilder:printcolumn:JSONPath=".spec.KibanaEnabled",name=Kibana,type=string
+// +kubebuilder:printcolumn:JSONPath=".spec.PrometheusEnabled",name=Prometheus,type=string
 // +kubebuilder:printcolumn:JSONPath=".spec.serviceName",name=Service,type=string
-// +kubebuilder:printcolumn:JSONPath=".status.health",name=Health,type=string
+// +kubebuilder:printcolumn:JSONPath=".status.zeebeHealth",name=Zeebe Cluster Health,type=string
 // ZeebeCluster is the Schema for the zeebeclusters API
 type ZeebeCluster struct {
 	metav1.TypeMeta   `json:",inline"`

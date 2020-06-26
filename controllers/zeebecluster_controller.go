@@ -105,6 +105,11 @@ func (p *PipelineRunner) createTaskAndTaskRunInstall(namespace string, zeebeClus
 				builder.StepCommand("make", "-C", "/workspace/zeebe-version-stream/", "build", "install"),
 				builder.StepEnvVar("CLUSTER_NAME", zeebeCluster.Name),
 				builder.StepEnvVar("OPERATE_ENABLED", strconv.FormatBool(zeebeCluster.Spec.OperateEnabled)),
+				builder.StepEnvVar("ELASTICSEARCH_ENABLED", strconv.FormatBool(zeebeCluster.Spec.ElasticSearchEnabled)),
+				builder.StepEnvVar("ELASTICSEARCH_HOST", zeebeCluster.Spec.ElasticSearchHost),
+				builder.StepEnvVar("ELASTICSEARCH_PORT", strconv.Itoa(int(zeebeCluster.Spec.ElasticSearchPort))),
+				builder.StepEnvVar("KIBANA_ENABLED", strconv.FormatBool(zeebeCluster.Spec.KibanaEnabled)),
+				builder.StepEnvVar("PROMETHEUS_ENABLED", strconv.FormatBool(zeebeCluster.Spec.PrometheusEnabled)),
 				builder.StepEnvVar("NAMESPACE", zeebeCluster.Name))))
 
 	if err := ctrl.SetControllerReference(&zeebeCluster, task, r.Scheme); err != nil {
@@ -360,17 +365,16 @@ func (r *ZeebeClusterReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error
 					var message string
 
 					for _, broker := range topology.Brokers {
-
-						message += fmt.Sprintf("%s%s%s%d \n", "Broker", broker.Host, ":", broker.Port)
-
+						message += fmt.Sprintf("%s%s%s%d \n", "Broker: ", broker.Host, ":", broker.Port)
 						for _, partition := range broker.Partitions {
-							message += fmt.Sprintf("\t %s%d%s%s \n", "  Partition", partition.PartitionId, ":", roleToString(partition.Role))
+							message += fmt.Sprintf("\t %s%d%s%s \n", "  Partition: ", partition.PartitionId, " ( ", roleToString(partition.Role), " )")
 
 						}
 					}
-					zeebeCluster.Status.Health = message
+					zeebeCluster.Status.ZeebeHealth = "ON"
+					zeebeCluster.Status.ZeebeHealthReport = message
 				} else {
-					zeebeCluster.Status.Health = "OFF"
+					zeebeCluster.Status.ZeebeHealth = "OFF"
 				}
 
 			} else {
@@ -471,7 +475,7 @@ func (r *ZeebeClusterReconciler) SetupWithManager(mgr ctrl.Manager) error {
 							ctrl.CreateOrUpdate(context.Background(), r.Client, &zeebeClusterList.Items[i], func() error {
 
 								//Set Ownership
-								zeebeClusterList.Items[i].Spec.ServiceName = zeebeClusterList.Items[i].Name + "-zeebe"
+								zeebeClusterList.Items[i].Spec.ServiceName = zeebeClusterList.Items[i].Name + "-zeebe-gateway"
 								zeebeClusterList.Items[i].Spec.StatefulSetName = statefulSet.Name
 								return nil
 							})
