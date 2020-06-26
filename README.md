@@ -7,6 +7,7 @@ This component is responsible for understanding and managing ZeebeClusters CRDs.
 The Zeebe Kubernetes Operator can be installed using Helm
 
 > helm repo add zeebe http://helm.zeebe.io
+
 > helm install zeebe-operator zeebe/zeebe-operator
 
 ## Basic Usage
@@ -44,6 +45,8 @@ Some of the tools that are used are:
 - Zeebe Helm Charts
 - Third Party Helm Charts such as: ElasticSearch, Kibana, Prometheus. 
 
+![Zeebe K8s Operator Components](imgs/zeebe-k8s-operator.png)
+
 The architecture of the Operator is quite simple, it creates Tekton Pipelines to Deploy the existing Zeebe Helm Charts into the cluster where the Operator is installed.
  
 It does this by using a version stream repository (source of truth) which define which versions of the charts needs to be used to provision a concrete cluster. 
@@ -54,6 +57,39 @@ Once the cluster is provisioned (by installing the [Zeebe Helm Charts](http://he
 - Gateway: Standalone Gateway which is created by a Deployment
 - Operate: If enabled a Deployment is created
 
+The status of this components is reflected into the `ZeebeCluster` (zb) resource that you can query by using `kubectl`
+
+> kubectl describe zb my-zeebe-cluster
+
+The Operator latest version also includes a more native Zeebe Health Check by using the Zeebe Go Client Library to connect to the provisioned clusters and check their health status. 
+This can be enabled by setting the following property to true: 
+
+```yaml
+apiVersion: zeebe.io/v1
+kind: ZeebeCluster
+metadata:
+  name: my-zeebe-cluster
+spec:
+  zeebeHealthChecksEnabled: true
+``` 
+The Zeebe Health Check Report can be found in the `ZeebeCluster` Resource `.Status.ZeebeHealthReport`
+
+You can also enable a deployment of **Camunda Operate** for your Zeebe Cluster by setting the following property to true
+
+```yaml
+apiVersion: zeebe.io/v1
+kind: ZeebeCluster
+metadata:
+  name: my-zeebe-cluster
+spec:
+  operateEnabled: true
+``` 
+
+
+## Custom Resource Definitions
+
+- ZeebeCluster Properties
+- Workflow Properties
 
 
 ## References and Links
