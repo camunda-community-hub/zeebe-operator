@@ -1,0 +1,9 @@
+apiVersion: zeebe.io/v1
+kind: ZeebeCluster
+metadata:
+  name: my-zeebe-cluster
+spec:
+  elasticSearchEnabled: true
+  elasticSearchHost: elasticsearch-master
+  elasticSearchPort: 9200
+  zeebeHealthChecksEnabled: true
