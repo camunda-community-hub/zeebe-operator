@@ -126,7 +126,7 @@ func (p *PipelineRunner) createTaskAndTaskRunInstall(namespace string, zeebeClus
 	taskRun := builder.TaskRun("install-task-run-"+zeebeCluster.Name, namespace,
 		builder.TaskRunSpec(
 			builder.TaskRunServiceAccountName(pipelinesServiceAccountName),
-			builder.TaskRunDeprecatedServiceAccount(pipelinesServiceAccountName, pipelinesServiceAccountName), // This require a SA being created for it to run
+		//	builder.TaskRunDeprecatedServiceAccount(pipelinesServiceAccountName, pipelinesServiceAccountName), // This require a SA being created for it to run
 
 			builder.TaskRunTaskRef("install-task-"+zeebeCluster.Name),
 			builder.TaskRunInputs(builder.TaskRunInputsResource("zeebe-version-stream",
@@ -165,7 +165,7 @@ func (p *PipelineRunner) createTaskAndTaskRunDelete(release string, namespace st
 	taskRun := builder.TaskRun("delete-task-run-"+release, namespace,
 		builder.TaskRunSpec(
 			builder.TaskRunServiceAccountName(pipelinesServiceAccountName),
-			builder.TaskRunDeprecatedServiceAccount(pipelinesServiceAccountName, pipelinesServiceAccountName), // This require a SA being created for it to run
+		//	builder.TaskRunDeprecatedServiceAccount(pipelinesServiceAccountName, pipelinesServiceAccountName), // This require a SA being created for it to run
 
 			builder.TaskRunTaskRef("delete-task-"+release+"-"+uuid.String()),
 			builder.TaskRunInputs(builder.TaskRunInputsResource("zeebe-version-stream",
