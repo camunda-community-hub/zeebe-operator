@@ -29,11 +29,11 @@ type ZeebeClusterSpec struct {
 	StatefulSetName      string `json:"statefulSetName,omitempty"`
 	ClusterType          string `json:"clusterType,omitempty"`
 	ServiceName          string `json:"serviceName,omitempty"`
-	ElasticSearchEnabled bool `json:"elasticSearchEnabled,omitempty"`
-	ElasticSearchHost     string `json:"elasticSearchHost,omitempty"`
-	ElasticSearchPort    int32 `json:"elasticSearchPort,omitempty"`
-	KibanaEnabled        bool `json:"kibanaEnabled,omitempty"`
-	PrometheusEnabled    bool `json:"prometheusEnabled,omitempty"`
+	ElasticSearchEnabled bool   `json:"elasticSearchEnabled,omitempty"`
+	ElasticSearchHost    string `json:"elasticSearchHost,omitempty"`
+	ElasticSearchPort    int32  `json:"elasticSearchPort,omitempty"`
+	KibanaEnabled        bool   `json:"kibanaEnabled,omitempty"`
+	PrometheusEnabled    bool   `json:"prometheusEnabled,omitempty"`
 	OperateEnabled       bool   `json:"operateEnabled,omitempty"`
 	ZeebeHealthChecks    bool   `json:"zeebeHealthChecksEnabled,omitempty"`
 }
@@ -42,11 +42,11 @@ type ZeebeClusterSpec struct {
 type ZeebeClusterStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	ClusterName        string `json:"clusterName"`
-	StatusName         string `json:"statusName"`
-	ZeebeHealth        string `json:"zeebeHealth"`
-	ZeebeHealthReport  string `json:"zeebeHealthReport"`
-	Conditions         []StatusCondition `json:"conditions,omitempty"`
+	ClusterName       string            `json:"clusterName"`
+	StatusName        string            `json:"statusName"`
+	ZeebeHealth       string            `json:"zeebeHealth"`
+	ZeebeHealthReport string            `json:"zeebeHealthReport"`
+	Conditions        []StatusCondition `json:"conditions,omitempty"`
 }
 
 // +kubebuilder:object:root=true
