@@ -1,0 +1,209 @@
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mcredential-initializer[0m
+{"level":"info","ts":1600420957.482886,"caller":"creds-init/main.go:44","msg":"Credentials initialized."}
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mworking-dir-initializer[0m
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mplace-tools[0m
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-zeebe-io-zeebe-operator-master-grvs6-65bn4[0m
+{"level":"info","ts":1600420969.2272031,"caller":"git/git.go:105","msg":"Successfully cloned https://github.com/zeebe-io/zeebe-operator.git @ v0.0.95 in path /workspace/source"}
+{"level":"warn","ts":1600420969.2612069,"caller":"git/git.go:152","msg":"Unexpected error: creating symlink: symlink /tekton/home/.ssh /root/.ssh: file exists"}
+{"level":"info","ts":1600420969.4814112,"caller":"git/git.go:133","msg":"Successfully initialized and updated submodules in path /workspace/source"}
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-builder-home[0m
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:d46e9b27947c855c214d948c6e0e9a620848f70c
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-jx-git-credentials[0m
+Generated Git credentials file /tekton/home/git/credentials
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-build-make-build[0m
+which: no controller-gen in (/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/google-cloud-sdk/bin:/opt/google/chrome:/usr/local/go/bin:/usr/local/glide:/usr/local/dep:/usr/local/:/home/jenkins/go/bin:/usr/local/kubebuilder/bin)
+go get sigs.k8s.io/controller-tools/cmd/controller-gen@v0.2.1
+go: finding sigs.k8s.io v0.2.1
+go: finding sigs.k8s.io/controller-tools/cmd/controller-gen v0.2.1
+go: finding sigs.k8s.io/controller-tools/cmd v0.2.1
+go: finding sigs.k8s.io/controller-tools v0.2.1
+go: downloading sigs.k8s.io/controller-tools v0.2.1
+go: extracting sigs.k8s.io/controller-tools v0.2.1
+go: downloading github.com/spf13/cobra v1.0.0
+go: downloading golang.org/x/tools v0.0.0-20191017205301-920acffc3e65
+go: downloading github.com/fatih/color v1.7.0
+go: downloading k8s.io/apimachinery v0.0.0-20190404173353-6a84e37a896d
+go: extracting github.com/fatih/color v1.7.0
+go: downloading gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+go: extracting github.com/spf13/cobra v1.0.0
+go: downloading github.com/mattn/go-isatty v0.0.12
+go: extracting gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+go: downloading github.com/spf13/pflag v1.0.5
+go: extracting github.com/mattn/go-isatty v0.0.12
+go: downloading k8s.io/api v0.0.0-20190409021203-6e4e0e4f393b
+go: extracting github.com/spf13/pflag v1.0.5
+go: extracting k8s.io/apimachinery v0.0.0-20190404173353-6a84e37a896d
+go: downloading github.com/gobuffalo/flect v0.1.5
+go: extracting github.com/gobuffalo/flect v0.1.5
+go: downloading golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd
+go: downloading github.com/google/gofuzz v1.0.0
+go: extracting k8s.io/api v0.0.0-20190409021203-6e4e0e4f393b
+go: extracting github.com/google/gofuzz v1.0.0
+go: downloading github.com/gogo/protobuf v1.3.1
+go: extracting golang.org/x/tools v0.0.0-20191017205301-920acffc3e65
+go: downloading k8s.io/apiextensions-apiserver v0.0.0-20190409022649-727a075fdec8
+go: downloading k8s.io/klog v1.0.0
+go: extracting golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd
+go: extracting k8s.io/klog v1.0.0
+go: downloading github.com/inconshreveable/mousetrap v1.0.0
+go: extracting k8s.io/apiextensions-apiserver v0.0.0-20190409022649-727a075fdec8
+go: extracting github.com/inconshreveable/mousetrap v1.0.0
+go: downloading sigs.k8s.io/yaml v1.1.0
+go: downloading github.com/mattn/go-colorable v0.1.2
+go: extracting sigs.k8s.io/yaml v1.1.0
+go: extracting github.com/mattn/go-colorable v0.1.2
+go: downloading golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+go: downloading gopkg.in/yaml.v2 v2.3.0
+go: extracting github.com/gogo/protobuf v1.3.1
+go: extracting gopkg.in/yaml.v2 v2.3.0
+go: downloading gopkg.in/inf.v0 v0.9.1
+go: extracting gopkg.in/inf.v0 v0.9.1
+go: extracting golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+go: downloading golang.org/x/text v0.3.2
+go: extracting golang.org/x/text v0.3.2
+go: finding github.com/spf13/cobra v1.0.0
+go: finding github.com/gobuffalo/flect v0.1.5
+go: finding github.com/spf13/pflag v1.0.5
+go: finding golang.org/x/tools v0.0.0-20191017205301-920acffc3e65
+go: finding k8s.io/apiextensions-apiserver v0.0.0-20190409022649-727a075fdec8
+go: finding k8s.io/apimachinery v0.0.0-20190404173353-6a84e37a896d
+go: finding github.com/fatih/color v1.7.0
+go: finding k8s.io/api v0.0.0-20190409021203-6e4e0e4f393b
+go: finding gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+go: finding github.com/gogo/protobuf v1.3.1
+go: finding github.com/mattn/go-colorable v0.1.2
+go: finding github.com/google/gofuzz v1.0.0
+go: finding github.com/mattn/go-isatty v0.0.12
+go: finding gopkg.in/inf.v0 v0.9.1
+go: finding golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd
+go: finding k8s.io/klog v1.0.0
+go: finding sigs.k8s.io/yaml v1.1.0
+go: finding golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+go: finding gopkg.in/yaml.v2 v2.3.0
+go: finding golang.org/x/text v0.3.2
+/home/jenkins/go/bin/controller-gen object:headerFile=./hack/boilerplate.go.txt paths="./..."
+go fmt ./...
+go vet ./...
+go: downloading github.com/onsi/ginkgo v1.10.1
+go: downloading sigs.k8s.io/testing_frameworks v0.1.1
+go: downloading github.com/onsi/gomega v1.7.0
+go: extracting sigs.k8s.io/testing_frameworks v0.1.1
+go: extracting github.com/onsi/ginkgo v1.10.1
+go: extracting github.com/onsi/gomega v1.7.0
+go: downloading github.com/hpcloud/tail v1.0.0
+go: extracting github.com/hpcloud/tail v1.0.0
+go: downloading gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7
+go: extracting gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7
+CGO_ENABLED=0 go build -o bin/manager main.go
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-build-container-build[0m
+E0918 09:27:03.567945       8 aws_credentials.go:77] while getting AWS credentials NoCredentialProviders: no valid providers in chain. Deprecated.
+	For verbose messaging see aws.Config.CredentialsChainVerboseErrors
+[36mINFO[0m[0001] Retrieving image manifest alpine:3.10        
+E0918 09:27:04.137551       8 metadata.go:154] while reading 'google-dockercfg' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg
+E0918 09:27:04.143805       8 metadata.go:166] while reading 'google-dockercfg-url' metadata: http status code: 404 while fetching url http://metadata.google.internal./computeMetadata/v1/instance/attributes/google-dockercfg-url
+[36mINFO[0m[0003] Retrieving image manifest alpine:3.10        
+[36mINFO[0m[0005] Built cross stage deps: map[]                
+[36mINFO[0m[0005] Retrieving image manifest alpine:3.10        
+[36mINFO[0m[0006] Retrieving image manifest alpine:3.10        
+[36mINFO[0m[0007] Executing 0 build triggers                   
+[36mINFO[0m[0007] Checking for cached layer gcr.io/camunda-researchanddevelopment/cache:91fe4fcde79980af1bbe47826bf4cdae294728713c7a97a834309c2760a57ca5... 
+[36mINFO[0m[0008] Cache entry expired: gcr.io/camunda-researchanddevelopment/cache:91fe4fcde79980af1bbe47826bf4cdae294728713c7a97a834309c2760a57ca5 
+[36mINFO[0m[0008] No cached layer found for cmd RUN apk add --update --no-cache ca-certificates git libc6-compat 
+[36mINFO[0m[0008] Unpacking rootfs as cmd RUN apk add --update --no-cache ca-certificates git libc6-compat requires it. 
+[36mINFO[0m[0009] RUN apk add --update --no-cache ca-certificates git libc6-compat 
+[36mINFO[0m[0009] Taking snapshot of full filesystem...        
+[36mINFO[0m[0009] Resolving 478 paths                          
+[36mINFO[0m[0009] cmd: /bin/sh                                 
+[36mINFO[0m[0009] args: [-c apk add --update --no-cache ca-certificates git libc6-compat] 
+[36mINFO[0m[0009] Running: [/bin/sh -c apk add --update --no-cache ca-certificates git libc6-compat] 
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.10/community/x86_64/APKINDEX.tar.gz
+(1/7) Installing ca-certificates (20191127-r2)
+(2/7) Installing nghttp2-libs (1.39.2-r1)
+(3/7) Installing libcurl (7.66.0-r1)
+(4/7) Installing expat (2.2.8-r0)
+(5/7) Installing pcre2 (10.33-r0)
+(6/7) Installing git (2.22.4-r0)
+(7/7) Installing libc6-compat (1.1.22-r3)
+Executing busybox-1.30.1-r3.trigger
+Executing ca-certificates-20191127-r2.trigger
+OK: 21 MiB in 21 packages
+[36mINFO[0m[0010] Taking snapshot of full filesystem...        
+[36mINFO[0m[0010] Resolving 1159 paths                         
+[36mINFO[0m[0011] WORKDIR /                                    
+[36mINFO[0m[0011] cmd: workdir                                 
+[36mINFO[0m[0011] Changed working directory to /               
+[36mINFO[0m[0011] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0011] Pushing layer gcr.io/camunda-researchanddevelopment/cache:91fe4fcde79980af1bbe47826bf4cdae294728713c7a97a834309c2760a57ca5 to cache now 
+[36mINFO[0m[0011] COPY ./bin/manager /manager                  
+[36mINFO[0m[0012] Resolving 1 paths                            
+[36mINFO[0m[0012] Taking snapshot of files...                  
+[36mINFO[0m[0014] Pushing layer gcr.io/camunda-researchanddevelopment/cache:13690ed770a4fb347967de4fe2b62e17b8b97bb9903569e11594c2519ac7fefb to cache now 
+[36mINFO[0m[0015] ENTRYPOINT ["/manager"]                      
+[36mINFO[0m[0015] No files changed in this command, skipping snapshotting. 
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-build-post-build[0m
+no CVE provider running in the current ** namespace so skip adding image to be analysed
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-changelog[0m
+Converted /workspace/source/charts/zeebe-operator to an unshallow repository
+Generating change log from git ref 680943dc1b06592c7dc788a09f7833e1a8e1760a => e4a8a573198391a0399bd4d63a9b4458951108c4
+WARNING: Failed to enrich commit d46e9b27947c855c214d948c6e0e9a620848f70c with issues: selected more than one user from users.jenkins.io: [******* *******-1 x-0]
+WARNING: Failed to enrich commit d46e9b27947c855c214d948c6e0e9a620848f70c with issues: selected more than one user from users.jenkins.io: [******* *******-1 x-0]
+Finding issues in commit messages using git format
+WARNING: No release found for zeebe-io/zeebe-operator and tag v0.0.95 so creating a new release
+Updated the release information at https://github.com/zeebe-io/zeebe-operator/releases/tag/v0.0.95
+generated: /workspace/source/charts/zeebe-operator/templates/release.yaml
+Created Release zeebe-operator-0-0-95 resource in namespace **
+Updating PipelineActivity zeebe-io-zeebe-operator-master-21 with version 0.0.95
+Updated PipelineActivities zeebe-io-zeebe-operator-master-21 with release notes URL: https://github.com/zeebe-io/zeebe-operator/releases/tag/v0.0.95
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-helm-release[0m
+WARNING: failed to get the requirements from team settings: validation failures in requirements from team settings:
+cluster: Additional property devEnvApprovers is not allowed
+velero: Additional property schedule is not allowed
+velero: Additional property ttl is not allowed
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: storage.googleapis.com https://storage.googleapis.com/chartmuseum.jenkins-x.io
+Successfully added Helm repository storage.googleapis.com.
+Adding missing Helm repo: jenkins-x-chartmuseum http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository jenkins-x-chartmuseum.
+WARNING: failed to get the requirements from team settings: validation failures in requirements from team settings:
+velero: Additional property schedule is not allowed
+velero: Additional property ttl is not allowed
+cluster: Additional property devEnvApprovers is not allowed
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+WARNING: failed to get the requirements from team settings: validation failures in requirements from team settings:
+cluster: Additional property devEnvApprovers is not allowed
+velero: Additional property schedule is not allowed
+velero: Additional property ttl is not allowed
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Uploading chart file zeebe-operator-0.0.95.tgz to http://jenkins-x-chartmuseum:8080/api/charts
+Received 201 response: {"saved":true}
+
+Showing logs for build [32mzeebe-io-zeebe-operator-master-grvs6-21[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-jx-promote[0m
+WARNING: prow based install so skip waiting for the merge of Pull Requests to go green as currently there is an issue with gettingstatuses from the PR, see https://github.com/jenkins-x/**/issues/2410
+WARNING: failed to get the requirements from team settings: validation failures in requirements from team settings:
+velero: Additional property schedule is not allowed
+velero: Additional property ttl is not allowed
+cluster: Additional property devEnvApprovers is not allowed
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Promoting app zeebe-operator version 0.0.95 to namespace **-staging
+Created Pull Request: https://github.com/*******/environment-zeebe-helm-new-staging/pull/230
+Added label updatebot to Pull Request https://github.com/*******/environment-zeebe-helm-new-staging/pull/230
+got git provider status pending from PR https://github.com/*******/environment-zeebe-helm-new-staging/pull/230
+got git provider status pending from PR https://github.com/*******/environment-zeebe-helm-new-staging/pull/230
+got git provider status pending from PR https://github.com/*******/environment-zeebe-helm-new-staging/pull/230
+Pull Request https://github.com/*******/environment-zeebe-helm-new-staging/pull/230 is merged at sha 90d83f2e0a1e55fb9c9602615650cc6566321048
+Pull Request merged but we are not waiting for the update pipeline to complete!
