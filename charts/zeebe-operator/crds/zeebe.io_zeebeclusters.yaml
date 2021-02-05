@@ -1,0 +1,103 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  name: zeebeclusters.zeebe.io
+spec:
+  additionalPrinterColumns:
+    - JSONPath: .status.statusName
+      name: Status
+      type: string
+    - JSONPath: .spec.serviceName
+      name: Service
+      type: string
+    - JSONPath: .status.health
+      name: Health
+      type: string
+  group: zeebe.io
+  names:
+    kind: ZeebeCluster
+    listKind: ZeebeClusterList
+    plural: zeebeclusters
+    shortNames:
+      - zb
+    singular: zeebecluster
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: ZeebeCluster is the Schema for the zeebeclusters API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: ZeebeClusterSpec defines the desired state of ZeebeCluster
+          properties:
+            operateEnabled:
+              type: boolean
+            serviceName:
+              type: string
+            statefulSetName:
+              description: 'INSERT ADDITIONAL SPEC FIELDS - desired state of cluster Important: Run "make" to regenerate code after modifying this file'
+              type: string
+            zeebeHealthChecksEnabled:
+              type: boolean
+          type: object
+        status:
+          description: ZeebeClusterStatus defines the observed state of ZeebeCluster
+          properties:
+            clusterName:
+              description: 'INSERT ADDITIONAL STATUS FIELD - define observed state of cluster Important: Run "make" to regenerate code after modifying this file'
+              type: string
+            conditions:
+              items:
+                properties:
+                  lastProbeTime:
+                    format: date-time
+                    type: string
+                  lastTransitionTime:
+                    format: date-time
+                    type: string
+                  message:
+                    type: string
+                  reason:
+                    type: string
+                  status:
+                    type: string
+                  type:
+                    type: string
+                required:
+                  - status
+                  - type
+                type: object
+              type: array
+            health:
+              type: string
+            statusName:
+              type: string
+          required:
+            - clusterName
+            - health
+            - statusName
+          type: object
+      type: object
+  version: v1
+  versions:
+    - name: v1
+      served: true
+      storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
