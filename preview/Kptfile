@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: preview
+upstream:
+  type: git
+  git:
+    commit: dfdfc37b6733bd9c4ace4414657b8c71607f2f16
+    repo: https://github.com/jenkins-x/jx3-pipeline-catalog
+    directory: /helm/preview
+    ref: master
