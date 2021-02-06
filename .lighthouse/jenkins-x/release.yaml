@@ -38,10 +38,27 @@ spec:
           resources: {}
         - name: build-container-build
           resources: {}
+        - image: gcr.io/camunda-researchanddevelopment/cd-flow:0.0.6
+          name: cdf-artifact-built
+          resources: { }
+          script: |
+            #!/usr/bin/env sh
+            source /workspace/source/.jx/variables.sh
+            export CDF_SINK=http://backend.35.204.61.61.xip.io/api/events
+            cdf artifact built --pipelineId $VERSION --id zeebe-operator || true
         - name: promote-changelog
           resources: {}
         - name: promote-helm-release
           resources: {}
+        - image: gcr.io/camunda-researchanddevelopment/cd-flow:0.0.6
+          name: cdf-release-and-finish-pipeline
+          resources: { }
+          script: |
+            #!/usr/bin/env sh
+            source /workspace/source/.jx/variables.sh
+            export CDF_SINK=http://backend.35.204.61.61.xip.io/api/events
+            cdf artifact released --module zeebe-operator --pipelineId $VERSION --id zeebe-operator
+            cdf pipeline finished --type module --module zeebe-operator --id $VERSION || true
 #        - name: promote-jx-promote
 #          resources: {}
   podTemplate: {}
