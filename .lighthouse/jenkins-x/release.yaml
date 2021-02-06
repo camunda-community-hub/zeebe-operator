@@ -45,7 +45,7 @@ spec:
             #!/usr/bin/env sh
             source /workspace/source/.jx/variables.sh
             export CDF_SINK=http://backend.35.204.61.61.xip.io/api/events
-            cdf artifact built --pipelineId $VERSION --id zeebe-operator || true
+            cdf artifact built --module zeebe-operator --pipelineId $VERSION --id zeebe-operator || true
         - name: promote-changelog
           resources: {}
         - name: promote-helm-release
