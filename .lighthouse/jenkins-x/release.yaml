@@ -26,6 +26,14 @@ spec:
           resources: {}
         - name: jx-variables
           resources: {}
+        - image: gcr.io/camunda-researchanddevelopment/cd-flow:0.0.6
+          name: cdf-start-pipeline
+          resources: { }
+          script: |
+            #!/usr/bin/env sh
+            source /workspace/source/.jx/variables.sh
+            export CDF_SINK=http://backend.35.204.61.61.xip.io/api/events
+            cdf pipeline started --type module --module zeebe-operator --id $VERSION || true
         - name: build-make-build
           resources: {}
         - name: build-container-build
