@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"github.com/go-logr/logr"
 	uuid2 "github.com/google/uuid"
+	cc "github.com/salaboy/camunda-cloud-go-client/pkg/cc/client"
 	"github.com/tektoncd/pipeline/pkg/apis/pipeline/v1alpha1"
 	tekton "github.com/tektoncd/pipeline/pkg/client/clientset/versioned"
 	"github.com/tektoncd/pipeline/test/builder"
@@ -97,6 +98,9 @@ func (p *PipelineRunner) initPipelineRunner(namespace string) {
 }
 
 func (p *PipelineRunner) createTaskAndTaskRunInstall(namespace string, zeebeCluster zeebev1.ZeebeCluster, r ZeebeClusterReconciler) error {
+
+	cc.CreateCluster("asd")
+
 	log := p.Log.WithValues("createTaskAndRun", namespace)
 	task := builder.Task("install-task-"+zeebeCluster.Name, namespace,
 		builder.TaskSpec(

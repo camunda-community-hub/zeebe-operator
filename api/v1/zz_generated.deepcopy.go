@@ -71,7 +71,7 @@ func (in *Workflow) DeepCopyObject() runtime.Object {
 func (in *WorkflowList) DeepCopyInto(out *WorkflowList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Workflow, len(*in))
@@ -160,7 +160,7 @@ func (in *ZeebeCluster) DeepCopyObject() runtime.Object {
 func (in *ZeebeClusterList) DeepCopyInto(out *ZeebeClusterList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]ZeebeCluster, len(*in))
