@@ -1,3 +1,5 @@
+[![Community Extension](https://img.shields.io/badge/Community%20Extension-An%20open%20source%20community%20maintained%20project-FF4700)](https://github.com/camunda-community-hub/community)[![Lifecyce: Unmaintained](https://img.shields.io/badge/Lifecycle-Unmaintained-lightgrey)](https://github.com/Camunda-Community-Hub/community/blob/main/extension-lifecycle.md#Unmaintained-)[![Lifecycle: Needs Maintainer](https://img.shields.io/badge/Lifecycle-Needs%20Maintainer%20-ff69b4)](https://github.com/Camunda-Community-Hub/community/blob/main/extension-lifecycle.md#Unmaintained-)
+
 # Zeebe Kubernetes Operator
 The Zeebe Kubernetes Operator was designed to ease the provisioning and monitoring of Zeebe Clusters and related components. 
 This is achieved by defining a set of Custom Resource Definitions for a ZeebeCluster and other types. 
